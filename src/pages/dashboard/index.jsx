@@ -70,6 +70,19 @@ const Dashboard = () => {
                 }}
             >
                 {/* ROW 1 */}
+                <Box
+                    gridColumn="span 8"
+                    gridRow="span 2"
+                    backgroundColor={theme.palette.background.alt}
+                    p="1rem"
+                    borderRadius="0.55rem"
+                >
+                    <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+                        Overview Of Sales
+                    </Typography>
+                    <OverviewChart view="sales" isDashboard={true} />
+                </Box>
+             
                 <StatBox
                     title="Total Customers"
                     value={data && data.totalCustomers}
@@ -92,18 +105,7 @@ const Dashboard = () => {
                         />
                     }
                 />
-                <Box
-                    gridColumn="span 8"
-                    gridRow="span 2"
-                    backgroundColor={theme.palette.background.alt}
-                    p="1rem"
-                    borderRadius="0.55rem"
-                >
-                    <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
-                        Overview Of Sales
-                    </Typography>
-                    <OverviewChart view="sales" isDashboard={true} />
-                </Box>
+              
                 <StatBox
                     title="Monthly Sales"
                     value={data && data.thisMonthStats.totalSales}

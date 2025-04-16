@@ -52,27 +52,70 @@ const Daily = () => {
         <Box m="1.5rem 2.5rem">
             <Header title="DAILY SALES" subtitle="Chart of daily sales" />
             <Box height="75vh">
-                <Box display="flex" justifyContent="flex-end">
-                    <Box>
-                        <DatePicker
-                            selected={startDate}
-                            onChange={(date) => setStartDate(date)}
-                            selectsStart
-                            startDate={startDate}
-                            endDate={endDate}
-                        />
-                    </Box>
-                    <Box>
-                        <DatePicker
-                            selected={endDate}
-                            onChange={(date) => setEndDate(date)}
-                            selectsEnd
-                            startDate={startDate}
-                            endDate={endDate}
-                            minDate={startDate}
-                        />
-                    </Box>
-                </Box>
+            <Box sx={{
+            display: 'flex',
+            gap: '20px',
+            justifyContent:'flex-end',
+            alignItems: 'center',
+            '& .react-datepicker-wrapper': {
+                width: 'auto'
+            },
+            '& .react-datepicker': {
+                border: '1px solid #e0e0e0',
+                borderRadius: '8px',
+                fontFamily: 'inherit',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.1)'
+            },
+            '& .react-datepicker__input-container input': {
+                padding: '8px 12px',
+                border: '1px solid #e0e0e0',
+                borderRadius: '6px',
+                fontSize: '14px',
+                width: '130px',
+                cursor: 'pointer',
+                transition: 'border-color 0.2s ease',
+                '&:hover': {
+                    borderColor: '#1976d2'
+                },
+                '&:focus': {
+                    outline: 'none',
+                    borderColor: '#1976d2',
+                    boxShadow: '0 0 0 2px rgba(25,118,210,0.2)'
+                }
+            },
+            '& .react-datepicker__day--selected': {
+                backgroundColor: '#1976d2',
+                borderRadius: '4px'
+            },
+    '& .react-datepicker__day:hover': {
+        backgroundColor: 'rgba(25,118,210,0.1)',
+        borderRadius: '4px'
+    }
+}}>
+    <Box>
+        <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            selectsStart
+            startDate={startDate}
+            endDate={endDate}
+            placeholderText="Start Date"
+            dateFormat="MMM dd, yyyy"
+        />
+    </Box>
+    <Box>
+        <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            selectsEnd
+            startDate={startDate}
+            endDate={endDate}
+            minDate={startDate}
+            placeholderText="End Date"
+            dateFormat="MMM dd, yyyy"
+        />
+    </Box>
+</Box>
 
                 {data ? (
                     <ResponsiveLine

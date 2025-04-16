@@ -29,11 +29,23 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             }}
         >
             <Toolbar sx={{ justifyContent: "space-between" }}>
+
+
                 {/* LEFT SIDE */}
-                <FlexBetween>
-                    <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
-                        <MenuIcon />
+                <FlexBetween gap="1.5rem">
+                    <IconButton onClick={() => dispatch(setMode())}>
+                        {theme.palette.mode === "dark" ? (
+                            <DarkModeOutlined sx={{ fontSize: "25px" }} />
+                        ) : (
+                            <LightModeOutlined sx={{ fontSize: "25px" }} />
+                        )}
                     </IconButton>
+                 
+                </FlexBetween>
+
+                {/* RIGHT SIDE */}
+                <FlexBetween>
+                
                     <FlexBetween
                         backgroundColor={theme.palette.background.alt}
                         borderRadius="9px"
@@ -45,20 +57,14 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                             <Search />
                         </IconButton>
                     </FlexBetween>
-                </FlexBetween>
 
-                {/* RIGHT SIDE */}
-                <FlexBetween gap="1.5rem">
-                    <IconButton onClick={() => dispatch(setMode())}>
-                        {theme.palette.mode === "dark" ? (
-                            <DarkModeOutlined sx={{ fontSize: "25px" }} />
-                        ) : (
-                            <LightModeOutlined sx={{ fontSize: "25px" }} />
-                        )}
+                    <IconButton onClick={() => setIsSidebarOpen(!isSidebarOpen)}>
+                        <MenuIcon />
                     </IconButton>
-                 
-
                 </FlexBetween>
+
+                
+                
             </Toolbar>
         </AppBar>
     );
