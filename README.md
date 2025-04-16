@@ -45,7 +45,6 @@ To run this project locally, follow these steps:
 ```bash
 git clone https://github.com/Sahil7475/Sales-Dashboard.git
 cd Sales-Dashboard
-cd client
 npm install
 ```
 Create a .env file in the directory and add your environment variables
