@@ -3,7 +3,7 @@ import { ResponsiveLine } from "@nivo/line"
 import { useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../../services/api.js";
 
-const OverviewChart = ({ isDashboard = false, view }) => {
+const OverviewChart = ({ isDashboard = false, view = 'sales' }) => {
     const theme = useTheme();
     const { data, isLoading } = useGetSalesQuery();
 
@@ -78,7 +78,14 @@ const OverviewChart = ({ isDashboard = false, view }) => {
                 },
                 tooltip: {
                     container: {
-                        color: theme.palette.primary.main,
+                        color: theme.palette.mode === 'dark' ? theme.palette.primary.main : '#000000',
+                    },
+                },
+                crosshair: {
+                    line: {
+                        stroke: theme.palette.secondary[200],
+                        strokeWidth: 1,
+                        strokeDasharray: "4 4",
                     },
                 },
             }}
@@ -127,6 +134,7 @@ const OverviewChart = ({ isDashboard = false, view }) => {
             pointBorderColor={{ from: "serieColor" }}
             pointLabelYOffset={-12}
             useMesh={true}
+            crosshairType="cross"
             legends={
                 !isDashboard
                     ? [

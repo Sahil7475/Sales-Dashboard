@@ -74,7 +74,14 @@ const Monthly = () => {
                             },
                             tooltip: {
                                 container: {
-                                    color: theme.palette.primary.main,
+                                    color: theme.palette.mode === 'dark' ? theme.palette.primary.main : '#000000',
+                                },
+                            },
+                            crosshair: {
+                                line: {
+                                    stroke: theme.palette.secondary[200],
+                                    strokeWidth: 1,
+                                    strokeDasharray: "4 4",
                                 },
                             },
                         }}
@@ -118,6 +125,7 @@ const Monthly = () => {
                         pointBorderColor={{ from: "serieColor" }}
                         pointLabelYOffset={-12}
                         useMesh={true}
+                        crosshairType="cross"
                         legends={[
                             {
                                 anchor: "top-right",

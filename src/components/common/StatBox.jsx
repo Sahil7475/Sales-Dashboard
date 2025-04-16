@@ -5,19 +5,16 @@ import FlexBetween from "../../styles/components/FlexBetween";
 const StatBox = ({ title, value, increase, icon, description }) => {
     const theme = useTheme();
     return (
-        <Box
-            gridColumn="span 2"
-            gridRow="span 1"
-            display="flex"
-            flexDirection="column"
-            justifyContent="space-between"
-            p="1.25rem 1rem"
-            flex="1 1 100%"
-            backgroundColor={theme.palette.background.alt}
-            borderRadius="0.55rem"
-        >
+        <Box width="100%">
             <FlexBetween>
-                <Typography variant="h6" sx={{ color: theme.palette.secondary[100] }}>
+                <Typography 
+                    variant="h6" 
+                    sx={{ 
+                        color: theme.palette.secondary[100],
+                        mb: "0.3rem",
+                        fontWeight: 600
+                    }}
+                >
                     {title}
                 </Typography>
                 {icon}
@@ -26,19 +23,36 @@ const StatBox = ({ title, value, increase, icon, description }) => {
             <Typography
                 variant="h3"
                 fontWeight="600"
-                sx={{ color: theme.palette.secondary[200] }}
+                sx={{ 
+                    color: theme.palette.secondary[200],
+                    mb: "0.5rem",
+                    mt: "0.4rem"
+                }}
             >
                 {value}
             </Typography>
+
             <FlexBetween gap="1rem">
                 <Typography
                     variant="h5"
                     fontStyle="italic"
-                    sx={{ color: theme.palette.secondary.light }}
+                    sx={{ 
+                        color: theme.palette.secondary.light,
+                        mt: "0.4rem",
+                        fontWeight: 500
+                    }}
                 >
                     {increase}
                 </Typography>
-                <Typography>{description}</Typography>
+                <Typography
+                    variant="body2"
+                    sx={{ 
+                        color: theme.palette.secondary[200],
+                        mt: "0.4rem"
+                    }}
+                >
+                    {description}
+                </Typography>
             </FlexBetween>
         </Box>
     );

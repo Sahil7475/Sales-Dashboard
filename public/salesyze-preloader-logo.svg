@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+  <style>
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .outer-circle {
+      fill: none;
+      stroke: #DAA520;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 283;
+      stroke-dashoffset: 80;
+      animation: rotate 2s infinite linear;
+    }
+    .inner-circle {
+      fill: none;
+      stroke: #FFD700;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 188;
+      stroke-dashoffset: 50;
+      animation: rotate 1.5s infinite linear reverse;
+    }
+    .s-shape {
+      fill: none;
+      stroke: #F0E68C;
+      stroke-width: 10;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 190;
+      stroke-dashoffset: 0;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .text {
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      font-size: 32px;
+      fill: #DAA520;
+      animation: pulse 2s infinite ease-in-out alternate;
+    }
+  </style>
+
+  <!-- Outer Circle -->
+  <circle class="outer-circle" cx="150" cy="150" r="90" />
+  
+  <!-- Inner Circle -->
+  <circle class="inner-circle" cx="150" cy="150" r="60" />
+  
+  <!-- S Shape -->
+  <path class="s-shape" d="M 140,120 C 120,120 120,140 140,140 C 160,140 160,160 140,160 C 120,160 120,180 140,180" />
+  
+  <!-- Text -->
+  <text class="text" x="150" y="230" text-anchor="middle">SaleSyze</text>
+</svg>

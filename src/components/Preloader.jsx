@@ -48,7 +48,7 @@ const Preloader = ({ isLoading }) => {
         >
             <Box
                 component="img"
-                src="/CompanyPreloader.png"
+                src="/salesyze-preloader-logo.svg"
                 alt="Salesyze"
                 sx={{
                     width: '200px',
