@@ -27,6 +27,9 @@ This is a **Sales Dashboard** with graphs, filters, and revenue insights that al
 
 - **Database**:
   - **MongoDB**: NoSQL database for managing user, sales, and product data.
+    
+- **Code Editor**:
+  -  **Cursor AI**: For enhancing code editing with AI assistance during development.
 
 ## Installation
 
@@ -40,7 +43,7 @@ To run this project locally, follow these steps:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/admin-dashboard.git
+git clone https://github.com/Sahil7475/Sales-Dashboard.git
 cd Sales-Dashboard
 cd client
 npm install
