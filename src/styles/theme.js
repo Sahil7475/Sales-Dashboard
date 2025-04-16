@@ -137,6 +137,36 @@ export const themeSettings = (mode) => {
                 fontSize: 14,
             },
         },
+        components: {
+            MuiCssBaseline: {
+                styleOverrides: `
+                    *::-webkit-scrollbar {
+                        width: 10px;
+                        height: 10px;
+                        background-color: transparent;
+                    }
+                    
+                    *::-webkit-scrollbar-track {
+                        background: ${mode === "dark" ? "#1e293b" : "#f1f5f9"};
+                        border-radius: 4px;
+                    }
+                    
+                    *::-webkit-scrollbar-thumb {
+                        background: ${mode === "dark" ? "#334155" : "#94a3b8"};
+                        border-radius: 4px;
+                    }
+                    
+                    *::-webkit-scrollbar-thumb:hover {
+                        background: ${mode === "dark" ? "#475569" : "#64748b"};
+                    }
+
+                    html {
+                        scrollbar-color: ${mode === "dark" ? "#334155 #1e293b" : "#94a3b8 #f1f5f9"};
+                        scrollbar-width: thin;
+                    }
+                `
+            },
+        },
     };
 };
 
