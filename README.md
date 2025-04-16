@@ -1,4 +1,4 @@
-# Sales Dashboard
+# Salesyze (Sales Dashboard)
 
 ## Overview
 
