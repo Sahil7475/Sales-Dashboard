@@ -57,5 +57,6 @@ npm start
 - [View Live](https://sales-dashboard-mocha.vercel.app/)
 
 ### Screenshots
-![image](https://github.com/user-attachments/assets/ac1d1eb1-9d2c-4b0a-a9ee-c2576d19a422)
+![image](https://github.com/user-attachments/assets/9936d94f-aa46-4a39-af5d-24c6663296a5)
+
 
