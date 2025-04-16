@@ -38,7 +38,6 @@ To run this project locally, follow these steps:
 ### Prerequisites
 
 - **Node.js**: Ensure you have Node.js installed on your system.
-- **MongoDB**: Install MongoDB or use a cloud-based MongoDB instance (e.g., MongoDB Atlas).
 
 ### Clone the Repository
 
