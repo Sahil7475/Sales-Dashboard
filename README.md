@@ -1,12 +1,58 @@
-# React + Vite
+# Sales Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a **Sales Dashboard** with graphs, filters, and revenue insights that also provides insights into sales performance. It helps visualize which products sell the most and gives daily, monthly, and breakdown reports of sales.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Sales Insights**: View sales data with daily, monthly, and breakdown reports.
+- **Performance Metrics**: Visual representation of sales performance and trends.
+- **Interactive Graphs**: Data visualization using Nivo charts to display user data, product trends, and sales insights.
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- **Frontend**:
+  - **React.js**: For building the user interface.
+  - **Material UI**: For pre-built components and responsive design.
+  - **Nivo Charts**: For creating interactive graphs and charts.
+  
+- **Backend**:
+  It includes pre-made APIs for handling various functionalities like data retrieval, and more.
+  hosted at - [API](https://admin-dashboard-psi-eight-90.vercel.app/)
+
+- **State Management**:
+  - **@reduxjs/toolkit**: For managing application state.
+  - **@reduxjs/toolkit/query/react**: For handling API data fetching and caching.
+
+- **Database**:
+  - **MongoDB**: NoSQL database for managing user, sales, and product data.
+
+## Installation
+
+To run this project locally, follow these steps:
+
+### Prerequisites
+
+- **Node.js**: Ensure you have Node.js installed on your system.
+- **MongoDB**: Install MongoDB or use a cloud-based MongoDB instance (e.g., MongoDB Atlas).
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/your-username/admin-dashboard.git
+cd Sales-Dashboard
+cd client
+npm install
+```
+Create a .env file in the directory and add your environment variables
+Start:
+```bash
+npm start 
+```
+## Live Demo
+- [View Live](https://sales-dashboard-mocha.vercel.app/)
+
+### Screenshots
+![image](https://github.com/user-attachments/assets/ac1d1eb1-9d2c-4b0a-a9ee-c2576d19a422)
+
