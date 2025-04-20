@@ -1,51 +1,62 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { API_TAGS, API_PATHS } from "../constants/api";
+
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
     reducerPath: 'adminapi',
-    tagTypes: ["User", "Products", "Customers", "Transactions", "Geography",
-        "Sales", "Admins", "Performance", "Dashboard"],
+    tagTypes: Object.values(API_TAGS),
     endpoints: (build) => ({
         getUser: build.query({
-            query: (id) => `general/user/${id}`,
-            providesTags: ["User"]
+            query: (id) => API_PATHS.USER(id),
+            providesTags: [API_TAGS.USER]
         }),
         getProducts: build.query({
-            query: () => "client/products",
-            providesTags: ["Products"],
+            query: () => API_PATHS.PRODUCTS,
+            providesTags: [API_TAGS.PRODUCTS],
         }),
         getCustomers: build.query({
-            query: () => "client/customers",
-            providesTags: ["Customers"],
+            query: () => API_PATHS.CUSTOMERS,
+            providesTags: [API_TAGS.CUSTOMERS],
         }),
         getTransactions: build.query({
             query: ({ page, pageSize, sort, search }) => ({
-                url: "client/transactions",
+                url: API_PATHS.TRANSACTIONS,
                 method: "GET",
                 params: { page, pageSize, sort, search },
             }),
-            providesTags: ["Transactions"],
+            providesTags: [API_TAGS.TRANSACTIONS],
         }),
         getGeography: build.query({
-            query: () => "client/geography",
-            providesTags: ["Geography"],
+            query: () => API_PATHS.GEOGRAPHY,
+            providesTags: [API_TAGS.GEOGRAPHY],
         }),
         getSales: build.query({
-            query: () => "sales/sales",
-            providesTags: ["Sales"],
+            query: () => API_PATHS.SALES,
+            providesTags: [API_TAGS.SALES],
         }),
         getAdmins: build.query({
-            query: () => "management/admins",
-            providesTags: ["Admins"],
+            query: () => API_PATHS.ADMINS,
+            providesTags: [API_TAGS.ADMINS],
         }),
         getUserPerformance: build.query({
-            query: (id) => `management/performance/${id}`,
-            providesTags: ["Performance"],
+            query: (id) => API_PATHS.PERFORMANCE(id),
+            providesTags: [API_TAGS.PERFORMANCE],
         }),
         getDashboard: build.query({
-            query: () => "general/dashboard",
-            providesTags: ["Dashboard"],
+            query: () => API_PATHS.DASHBOARD,
+            providesTags: [API_TAGS.DASHBOARD],
         }),
     }),
-
 });
-export const { useGetUserQuery, useGetProductsQuery, useGetCustomersQuery, useGetTransactionsQuery, useGetGeographyQuery, useGetSalesQuery, useGetAdminsQuery, useGetUserPerformanceQuery, useGetDashboardQuery } = api
+
+export const {
+    useGetUserQuery,
+    useGetProductsQuery,
+    useGetCustomersQuery,
+    useGetTransactionsQuery,
+    useGetGeographyQuery,
+    useGetSalesQuery,
+    useGetAdminsQuery,
+    useGetUserPerformanceQuery,
+    useGetDashboardQuery
+} = api;

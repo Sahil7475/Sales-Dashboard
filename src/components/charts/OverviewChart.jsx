@@ -1,9 +1,9 @@
 import React, { useMemo } from "react";
-import { ResponsiveLine } from "@nivo/line"
-import { useTheme } from "@mui/material";
+import { ResponsiveLine } from "@nivo/line";
+import { Box, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../../services/api.js";
 
-const OverviewChart = ({ isDashboard = false, view = 'sales' }) => {
+const OverviewChart = React.memo(({ isDashboard = false, view = 'sales' }) => {
     const theme = useTheme();
     const { data, isLoading } = useGetSalesQuery();
 
@@ -42,7 +42,7 @@ const OverviewChart = ({ isDashboard = false, view = 'sales' }) => {
         );
 
         return [[totalSalesLine], [totalUnitsLine]];
-    }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [data, theme.palette]);
 
     if (!data || isLoading) return "Loading...";
 
@@ -167,6 +167,8 @@ const OverviewChart = ({ isDashboard = false, view = 'sales' }) => {
             }
         />
     );
-};
+});
+
+OverviewChart.displayName = 'OverviewChart';
 
 export default OverviewChart; 

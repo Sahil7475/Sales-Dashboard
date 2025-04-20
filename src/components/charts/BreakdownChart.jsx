@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { Box, Typography, useTheme } from "@mui/material";
 import { useGetSalesQuery } from "../../services/api.js";
 
-const BreakdownChart = ({ isDashboard = false }) => {
-    const { data, isLoading } = useGetSalesQuery();
+const BreakdownChart = React.memo(({ isDashboard = false }) => {
     const theme = useTheme();
+    const { data, isLoading } = useGetSalesQuery();
+
+    const formatCurrency = useCallback((value) => {
+        return new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+        }).format(value);
+    }, []);
+
+    const colors = useMemo(() => [
+        theme.palette.secondary[500],
+        theme.palette.secondary[300],
+        theme.palette.secondary[300],
+        theme.palette.secondary[500],
+    ], [theme.palette]);
+
+    const formattedData = useMemo(() => {
+        if (!data?.salesByCategory) return [];
+        return Object.entries(data.salesByCategory).map(
+            ([category, sales], i) => ({
+                id: category,
+                label: category,
+                value: sales,
+                color: colors[i],
+            })
+        );
+    }, [data?.salesByCategory, colors]);
 
     if (!data || isLoading) return "Loading...";
-
-    const colors = [
-        theme.palette.secondary[500],
-        theme.palette.secondary[300],
-        theme.palette.secondary[300],
-        theme.palette.secondary[500],
-    ];
-    const formattedData = Object.entries(data.salesByCategory).map(
-        ([category, sales], i) => ({
-            id: category,
-            label: category,
-            value: sales,
-            color: colors[i],
-        })
-    );
 
     return (
         <Box
@@ -62,10 +75,10 @@ const BreakdownChart = ({ isDashboard = false }) => {
                         },
                     },
                     tooltip: {
-                        container: {
-                            color: theme.palette.primary.main,
-                        },
+                    container: {
+                        color: theme.palette.mode === 'dark' ? theme.palette.primary.main : '#000000',
                     },
+                },
                 }}
                 colors={{ datum: "data.color" }}
                 margin={
@@ -130,11 +143,13 @@ const BreakdownChart = ({ isDashboard = false }) => {
                 }}
             >
                 <Typography variant="h6">
-                    {!isDashboard && "Total:"} ${data.yearlySalesTotal}
+                    {!isDashboard && "Total:"} {formatCurrency(data.yearlySalesTotal)}
                 </Typography>
             </Box>
         </Box>
     );
-};
+});
+
+BreakdownChart.displayName = 'BreakdownChart';
 
 export default BreakdownChart; 

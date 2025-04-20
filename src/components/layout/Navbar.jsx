@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import {
     LightModeOutlined,
     DarkModeOutlined,
@@ -21,16 +21,9 @@ import {
     Paper,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { availablePages } from "../../constants/navigation";
 
-const availablePages = [
-    { name: "Overview", path: "/overview" },
-    { name: "Daily", path: "/daily" },
-    { name: "Monthly", path: "/monthly" },
-    { name: "Breakdown", path: "/breakdown" },
-    { name: "Management", path: "/performance" },
-];
-
-const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
+const Navbar = React.memo(({ isSidebarOpen, setIsSidebarOpen }) => {
     const dispatch = useDispatch();
     const theme = useTheme();
     const navigate = useNavigate();
@@ -38,42 +31,68 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [isFirstClick, setIsFirstClick] = useState(true);
 
-    const filteredPages = isFirstClick 
-        ? availablePages 
-        : availablePages.filter(page =>
-            page.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+    const filteredPages = useMemo(() => 
+        isFirstClick 
+            ? availablePages 
+            : availablePages.filter(page =>
+                page.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ),
+        [isFirstClick, searchQuery]
+    );
 
-    const handleSearch = (page) => {
+    const handleSearch = useCallback((page) => {
         navigate(page.path);
         setSearchQuery("");
         setShowSuggestions(false);
         setIsFirstClick(true);
-    };
+    }, [navigate]);
 
-    const handleKeyPress = (e) => {
+    const handleKeyPress = useCallback((e) => {
         if (e.key === 'Enter' && filteredPages.length > 0) {
             handleSearch(filteredPages[0]);
         }
-    };
+    }, [filteredPages, handleSearch]);
 
-    const handleInputFocus = () => {
+    const handleInputChange = useCallback((e) => {
+        setSearchQuery(e.target.value);
+        setShowSuggestions(true);
+    }, []);
+
+    const handleInputFocus = useCallback(() => {
         setShowSuggestions(true);
         if (isFirstClick) {
             setIsFirstClick(false);
         }
-    };
+    }, [isFirstClick]);
+
+    const appBarStyles = useMemo(() => ({
+        position: "static",
+        background: "none",
+        boxShadow: "none",
+    }), []);
+
+    const searchBoxStyles = useMemo(() => ({
+        backgroundColor: theme.palette.background.alt,
+        borderRadius: "9px",
+        gap: "3rem",
+        p: "0.12rem 1.5rem",
+    }), [theme.palette]);
+
+    const suggestionsPaperStyles = useMemo(() => ({
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        right: 0,
+        zIndex: 1,
+        mt: 1,
+        maxHeight: "200px",
+        overflow: "auto",
+        backgroundColor: theme.palette.background.alt,
+    }), [theme.palette]);
 
     return (
-        <AppBar
-            sx={{
-                position: "static",
-                background: "none",
-                boxShadow: "none",
-            }}
-        >
+        <AppBar sx={appBarStyles}>
             <Toolbar sx={{ justifyContent: "space-between" }}>
-                {/* LEFT SIDE */}
                 <FlexBetween gap="1.5rem">
                     <IconButton onClick={() => dispatch(setMode())}>
                         {theme.palette.mode === "dark" ? (
@@ -84,22 +103,13 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                     </IconButton>
                 </FlexBetween>
 
-                {/* RIGHT SIDE */}
                 <FlexBetween>
-                    <Box sx={{ position: "relative" }}>
-                        <FlexBetween
-                            backgroundColor={theme.palette.background.alt}
-                            borderRadius="9px"
-                            gap="3rem"
-                            p="0.12rem 1.5rem"
-                        >
+                    <Box>
+                        <FlexBetween sx={searchBoxStyles}>
                             <InputBase 
                                 placeholder="Search..." 
                                 value={searchQuery}
-                                onChange={(e) => {
-                                    setSearchQuery(e.target.value);
-                                    setShowSuggestions(true);
-                                }}
+                                onChange={handleInputChange}
                                 onFocus={handleInputFocus}
                                 onKeyPress={handleKeyPress}
                             />
@@ -109,19 +119,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
                         </FlexBetween>
                         
                         {showSuggestions && (
-                            <Paper
-                                sx={{
-                                    position: "absolute",
-                                    top: "100%",
-                                    left: 0,
-                                    right: 0,
-                                    zIndex: 1,
-                                    mt: 1,
-                                    maxHeight: "200px",
-                                    overflow: "auto",
-                                    backgroundColor: theme.palette.background.alt,
-                                }}
-                            >
+                            <Paper sx={suggestionsPaperStyles}>
                                 <List>
                                     {filteredPages.map((page) => (
                                         <ListItem key={page.path} disablePadding>
@@ -149,6 +147,8 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
             </Toolbar>
         </AppBar>
     );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar; 

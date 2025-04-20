@@ -3,9 +3,9 @@ import {
     GridFilterMenuItem,
     HideGridColMenuItem,
 } from "@mui/x-data-grid";
+import React from "react";
 
-
-const CustomColumnMenu = (props) => {
+const CustomColumnMenu = React.memo((props) => {
     const { hideMenu, currentColumn, open } = props;
     return (
         <GridColumnMenuContainer
@@ -17,6 +17,8 @@ const CustomColumnMenu = (props) => {
             <HideGridColMenuItem onClick={hideMenu} column={currentColumn} />
         </GridColumnMenuContainer>
     );
-};
+});
+
+CustomColumnMenu.displayName = 'CustomColumnMenu';
 
 export default CustomColumnMenu;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box, Typography, useTheme } from '@mui/material';
 import { keyframes } from '@mui/system';
 
@@ -26,49 +26,55 @@ const fadeOut = keyframes`
   }
 `;
 
-const Preloader = ({ isLoading }) => {
+const Preloader = React.memo(({ isLoading }) => {
     const theme = useTheme();
     
+    const styles = useMemo(() => ({
+        container: {
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            display: isLoading ? 'flex' : 'none',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: theme.palette.background.default,
+            zIndex: 9999,
+            animation: !isLoading ? `${fadeOut} 0.5s ease-out forwards` : 'none',
+        },
+        logo: {
+            width: '200px',
+            height: 'auto',
+            animation: `${pulse} 2s ease-in-out infinite`,
+        },
+        text: {
+            color: theme.palette.secondary.main,
+            marginTop: 3,
+            fontWeight: 'bold',
+            opacity: 0.9
+        }
+    }), [isLoading, theme.palette]);
+    
     return (
-        <Box
-            sx={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                display: isLoading ? 'flex' : 'none',
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: theme.palette.background.default,
-                zIndex: 9999,
-                animation: !isLoading ? `${fadeOut} 0.5s ease-out forwards` : 'none',
-            }}
-        >
+        <Box sx={styles.container}>
             <Box
                 component="img"
                 src="/salesyze-preloader-logo.svg"
                 alt="Salesyze"
-                sx={{
-                    width: '200px',
-                    height: 'auto',
-                    animation: `${pulse} 2s ease-in-out infinite`,
-                }}
+                sx={styles.logo}
             />
             <Typography
                 variant="h5"
-                sx={{
-                    color: theme.palette.secondary.main,
-                    marginTop: 3,
-                    fontWeight: 'bold',
-                    opacity: 0.9
-                }}
+                sx={styles.text}
             >
                 Preparing your insights...
             </Typography>
         </Box>
     );
-};
+});
+
+Preloader.displayName = 'Preloader';
 
 export default Preloader; 
