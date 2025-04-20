@@ -1,4 +1,4 @@
-# Sales Dashboard
+# Salesyze (Sales Dashboard)
 
 ## Overview
 
@@ -38,14 +38,12 @@ To run this project locally, follow these steps:
 ### Prerequisites
 
 - **Node.js**: Ensure you have Node.js installed on your system.
-- **MongoDB**: Install MongoDB or use a cloud-based MongoDB instance (e.g., MongoDB Atlas).
 
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/Sahil7475/Sales-Dashboard.git
 cd Sales-Dashboard
-cd client
 npm install
 ```
 Create a .env file in the directory and add your environment variables
@@ -57,5 +55,6 @@ npm start
 - [View Live](https://sales-dashboard-mocha.vercel.app/)
 
 ### Screenshots
-![image](https://github.com/user-attachments/assets/ac1d1eb1-9d2c-4b0a-a9ee-c2576d19a422)
+![image](https://github.com/user-attachments/assets/9936d94f-aa46-4a39-af5d-24c6663296a5)
+
 
