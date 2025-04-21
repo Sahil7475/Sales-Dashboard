@@ -104,7 +104,7 @@ const Navbar = React.memo(({ isSidebarOpen, setIsSidebarOpen }) => {
                 </FlexBetween>
 
                 <FlexBetween>
-                    <Box x={{ position: "relative" }}>
+                    <Box sx={{ position: "relative" }}>
                         <FlexBetween sx={searchBoxStyles}>
                             <InputBase 
                                 placeholder="Search..." 
